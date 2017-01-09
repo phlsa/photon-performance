@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Fast Tabs Concept</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    h2 {
+      clear: both;
+    }
+    
+    .tabbar {
+      width: 80%;
+      float: left;
+      height: 40px;
+      overflow: hidden;
+      background-color: #eee;
+      margin-bottom: 100px;
+    }
+    
+    .tab {
+      float: left;
+      width: 180px;
+      padding: 10px;
+      cursor: default;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    .tab:hover {
+      background-color: #ccc;
+    }
+    
+    .tab span {
+      display: inline-block;
+      width: 180px;
+      overflow-x: hidden;
+      white-space: nowrap;
+    }
+    
+    .plus {
+      width: 20px !important;
+      text-align: center;
+    }
+    
+    .tab.active {
+      background-color: #bbb;
+    }
+    
+    @keyframes slide {
+      from {
+        width: 0;
+      }
+      to {
+        width: 180px;
+      }
+    }
+    
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes moveup {
+      from {
+        transform: translate(0, 30px);
+      }
+      to {
+        transform: none;
+      }
+    }
+    /* Normal mode */
+    
+    #tabbar1 .tab {
+      animation: slide 0.3s ease;
+    }
+    /* Fast mode */
+    
+    #tabbar2 .tab span {
+      animation: moveup 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Current Implementation</h2>
+  <div class="tabbar" id="tabbar1">
+    <div class="tab active"><span>First Tab</span></div>
+    <div class="tab plus" id="plus1">+</div>
+  </div>
+
+
+  <h2>Segmented</h2>
+  <div class="tabbar" id="tabbar2">
+    <div class="tab active"><span>First Tab</span></div>
+    <div class="tab plus" id="plus2">+</div>
+  </div>
+
+  <script type="text/javascript">
+    var tabbar1 = document.getElementById('tabbar1');
+    var plus1 = document.getElementById('plus1');
+    plus1.addEventListener('click', function() {
+      document.querySelectorAll('#tabbar1 .active')[0].classList.remove('active');
+      var t = document.createElement('div');
+      s = document.createElement('span');
+      s.innerText = "New Tab";
+      t.appendChild(s);
+      t.classList.add('tab');
+      t.classList.add('active');
+      tabbar1.insertBefore(t, plus1);
+    });
+
+    var tabbar2 = document.getElementById('tabbar2');
+    var plus2 = document.getElementById('plus2');
+    plus2.addEventListener('click', function() {
+      document.querySelectorAll('#tabbar2 .active')[0].classList.remove('active');
+      var t = document.createElement('div');
+      s = document.createElement('span');
+      s.innerText = "New Tab";
+      t.appendChild(s);
+      t.classList.add('tab');
+      t.classList.add('active');
+      tabbar2.insertBefore(t, plus2);
+    });
+  </script>
+</body>
+
+</html>

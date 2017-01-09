@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Startup Concept</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: orange;
+    }
+    
+    .win,
+    .win * {
+      opacity: 0;
+    }
+    
+    .win,
+    .startframe {
+      width: 800px;
+      height: 600px;
+    }
+    
+    .win {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background-color: #fff;
+      border: 1px solid dodgerblue;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    #w2 {
+      left: 40px;
+      top: 40px;
+    }
+    
+    .startframe {
+      background-color: #fff;
+      background-image: url('img/search.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 75%;
+    }
+    
+    .toolbar {
+      height: 75px;
+      background-image: url('img/tb3.png'), url('img/tb1.png'), url('img/tb2.png');
+      background-repeat: no-repeat, no-repeat, repeat-x;
+      background-position: top right, top left, top;
+      background-size: auto 90%;
+      transition: opacity 0.2s ease;
+    }
+    
+    #taskbar {
+      width: 100%;
+      height: 40px;
+      background-color: #000;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      color: #fff;
+      float: left;
+    }
+    
+    #taskbar div {
+      width: 40px;
+      height: 40px;
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      cursor: default;
+    }
+    
+    #taskbar div:hover {
+      background-color: #333;
+    }
+    
+    #taskbar div.active {
+      height: 37px;
+      background-color: #555;
+      border-bottom: 3px solid dodgerblue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="w1" class="win">
+    <div id="s1" class="startframe">
+      <div id="t1" class="toolbar"></div>
+    </div>
+  </div>
+
+  <div id="w2" class="win">
+    <div id="s2" class="startframe">
+      <div id="t2" class="toolbar"></div>
+    </div>
+  </div>
+
+  <div id="taskbar">
+    <div class="launch" id="l2">F</div>
+    <div class="launch" id="l1">X</div>
+  </div>
+
+  <script type="text/javascript">
+    function vars() {
+      for (var i = 0; i < arguments.length; i++) {
+        window[arguments[i]] = document.getElementById(arguments[i]);
+      }
+    }
+    vars('l1', 'w1', 's1', 't1');
+    vars('l2', 'w2', 's2', 't2');
+
+    l1.addEventListener('click', function() {
+      setTimeout(function() {
+        l1.classList.add('active');
+        l2.classList.remove('active');
+        w1.style['z-index'] = 10;
+        w2.style['z-index'] = 1;
+        w1.style.opacity = 1;
+        setTimeout(function() {
+          s1.style.opacity = 1;
+          setTimeout(function() {
+            t1.style.opacity = 1;
+          }, 2000);
+        }, 1000);
+      }, 200);
+    });
+
+    l2.addEventListener('click', function() {
+      setTimeout(function() {
+        l2.classList.add('active');
+        l1.classList.remove('active');
+        w2.style['z-index'] = 10;
+        w1.style['z-index'] = 1;
+        setTimeout(function() {
+          w2.style.opacity = 1;
+          s2.style.opacity = 1;
+          t2.style.opacity = 1;
+        }, 3000);
+      }, 200);
+    });
+  </script>
+</body>
+
+</html>

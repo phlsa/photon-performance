@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .toolbar {
+      display: block;
+      width: 80%;
+      height: 40px;
+      background-color: #eee;
+      border: 1px solid #bbb;
+      margin-top: 30px;
+      cursor: default;
+      padding: 3px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+      color: #444;
+      line-height: 40px;
+      cursor: default;
+    }
+    .btn:hover:not(.clicked) {
+      background-color: #ccc;
+    }
+    
+    #tb1 .btn:not(.clicked) {
+      transition: all 0.3s ease;
+    }
+
+    .clicked {
+      color: #fff;
+      background-color: #333;
+    }
+
+    #tb3 .btn:hover {
+      transition: transform 0.1s ease-out;
+    }
+
+    #tb3 .clicked, #tb4 .clicked {
+      transform: scale(1.3);
+    }
+
+    #tb4 .btn:hover {
+      transition: transform 0.2s cubic-bezier(.04,1.35,.2,1.52);
+    }
+    </style>
+  </head>
+  <body>
+    <a href="index.html">Back</a>
+    <button onclick="window.location.reload()">Reset</button>
+
+    <h1>Toolbar Buttons</h1>
+    <h2>With Fade-in, react on click</h2>
+    <div class="toolbar" id="tb1">
+      <div class="btn">A</div>
+      <div class="btn">B</div>
+      <div class="btn">C</div>
+    </div>
+
+    <h2>Instant Response, react on mouse down</h2>
+    <div class="toolbar" id="tb2">
+      <div class="btn">A</div>
+      <div class="btn">B</div>
+      <div class="btn">C</div>
+    </div>
+
+    <h2>With Click Effect</h2>
+    <div class="toolbar" id="tb3">
+      <div class="btn">A</div>
+      <div class="btn">B</div>
+      <div class="btn">C</div>
+    </div>
+
+    <h2>Bouncy</h2>
+    <div class="toolbar" id="tb4">
+      <div class="btn">A</div>
+      <div class="btn">B</div>
+      <div class="btn">C</div>
+    </div>
+
+    <script>
+      var btns1 = Array.prototype.slice.call(document.querySelectorAll('#tb1 .btn'), 0);
+      btns1.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          btn.classList.toggle('clicked');
+        });
+      });
+        
+      var btns2 = Array.prototype.slice.call(document.querySelectorAll('#tb2 .btn, #tb3 .btn, #tb4 .btn'), 0);
+      btns2.forEach(function(btn) {
+        btn.addEventListener('mousedown', function(e) {
+          btn.classList.toggle('clicked');
+        });
+      });
+
+    </script>
+  </body>
+</html>

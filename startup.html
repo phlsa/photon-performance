@@ -5,10 +5,14 @@
     <title>Startup Concept</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="proto.js"></script>
     <style>
         body {
             font-family: sans-serif;
-            background-color: orange;
+            background-image: url(img/desktop.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #015368;
         }
         
         a {
@@ -73,32 +77,49 @@
             float: left;
         }
         
-        #taskbar div {
+        #taskbar div.launch {
             width: 40px;
             height: 40px;
             float: left;
-            font-size: 20px;
+            font-size: 26px;
+            line-height: 40px;
             font-weight: bold;
             text-align: center;
             vertical-align: middle;
             cursor: default;
+            margin-left: 1px;
         }
         
-        #taskbar div:hover {
+        #taskbar div.launch:hover {
             background-color: #333;
         }
+
+        #taskbar div.launch:active {
+            background-color: #000;
+        }
         
-        #taskbar div.active {
+        #taskbar div.launch.active {
             height: 37px;
             background-color: #555;
             border-bottom: 3px solid dodgerblue;
+        }
+
+        .startbtn {
+            float: left;
+            height: 40px;
+            width: 353px;
+            background-image: url(img/taskbar.png);
+            background-size: auto 100%;
+            margin-right: 4px;
         }
     </style>
 </head>
 
 <body>
-    <a href="index.html">Back</a>
-    <button onclick="window.location.reload()">Reset</button>
+    <span id="navigation">
+        <a href="index.html">Back</a>
+        <button onclick="window.location.reload()">Reset</button>
+    </span>
 
     <div id="w1" class="win">
         <div id="s1" class="startframe">
@@ -113,11 +134,16 @@
     </div>
 
     <div id="taskbar">
+        <div class="startbtn"></div>
         <div class="launch" id="l2">F</div>
         <div class="launch" id="l1">X</div>
     </div>
 
     <script type="text/javascript">
+        if (getUrlVars()['testing']) {
+            document.getElementById('navigation').style.display = "none";
+        }
+        
         function vars() {
             for (var i = 0; i < arguments.length; i++) {
                 window[arguments[i]] = document.getElementById(arguments[i]);

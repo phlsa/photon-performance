@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Experiment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <script type="text/javascript" src="../proto.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #404040;
+        text-align: center;
+      }
+      #experiment {
+        background-color: #fff;
+      }
+      #start_test {
+        font-size: 60px;
+        color: #005451;
+        background-color: #35eee7;
+        border: none;
+        padding: 20px 40px;
+        border-radius: 4px;
+        margin-top: 40vh;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="start_test">Start the Test</button>
+    <iframe src="../startup.html?testing=yes" id="experiment" width="800" height="600" style="display:none">Experiment</iframe>
+    <script type="text/javascript">
+      get('#start_test').addEventListener('click', function() {
+        get('#experiment').style.display = "block";
+
+        if (get('#start_test').webkitRequestFullscreen) {
+          get('#experiment').webkitRequestFullscreen();
+        } 
+        if (get('#start_test').mozRequestFullScreen) {
+          get('#experiment').mozRequestFullScreen();
+        }
+      });
+    </script>
+  </body>
+</html>

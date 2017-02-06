@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Page Loading</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="proto.js"></script>
+    <style>
+    body {
+      margin: 0;
+    }
+    body.t-20 {
+      background-color: beige;
+    }
+    body.t-80 {
+      font-family: sans-serif;
+    }
+    section {
+      display: none;
+    }
+    .main {
+      width: 80vw;
+      background-color: white;
+      float: left;
+      margin-left: 10vw;
+    }
+    .main > h1 {
+      text-align: center;
+    }
+    .menu div {
+      width: 20%;
+      text-align: center;
+      float: left;
+    }
+    .sidebar {
+      width: 20%;
+      margin-right: 5%;
+      float: left;
+    }
+    .content {
+      width: 75%
+      float: left;
+    }
+    </style>
+  </head>
+  <body>
+    <section class="s-30 main">
+      <h1>Some header content</h1>
+      <section class="s-50 menu">
+        <div>Some Item</div>
+        <div>Another Thing</div>
+        <div>Generic</div>
+        <div>About this thing</div>
+        <div>Contact</div>
+      </section>
+      <section class="s-60 sidebar">
+        side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar side bar
+      </section>
+      <section class="s-70 content">
+        Some posts go here
+      </section>
+    </section>
+
+    <script type="text/javascript">
+      var loadTime = 3000;
+      var segmentLength = loadTime/100;
+      var styleElem = document.createElement('style');
+      
+      range(0, 100).forEach(function(i) {
+        setTimeout(function() {
+          get('body').classList.add('t-'+i);
+          elem('t-'+i).forEach(function(e) {
+            e.style.display = 'inline-block';
+          });
+        }, segmentLength*i);
+      });
+
+      var txt = '';
+      range(0, 100).forEach(function(i) {
+        txt += '.t-'+i+' .s-'+i+' {display:block} \n';
+      });
+      styleElem.innerText = txt;
+      get('head').appendChild(styleElem);
+    </script>
+  </body>
+</html>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="proto.js"></script>
+    <script type="text/javascript" src="loadSimulation.js"></script>
     <style>
     body {
       margin: 0;
@@ -63,25 +64,7 @@
     </section>
 
     <script type="text/javascript">
-      var loadTime = 7000;
-      var segmentLength = loadTime/100;
-      var styleElem = document.createElement('style');
-      
-      range(0, 100).forEach(function(i) {
-        setTimeout(function() {
-          get('body').classList.add('t-'+i);
-          elem('.s-'+i).forEach(function(e) {
-            e.classList.remove('s-'+i);
-          });
-        }, segmentLength*i);
-      });
-
-      var txt = '';
-      range(0, 100).forEach(function(i) {
-        txt += '.s-'+i+' {display:none} \n';
-      });
-      styleElem.innerText = txt;
-      get('head').appendChild(styleElem);
+      simulateLoad(7000);
     </script>
   </body>
 </html>

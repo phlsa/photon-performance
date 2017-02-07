@@ -15,9 +15,6 @@
     body.t-80 {
       font-family: sans-serif;
     }
-    section {
-      display: none;
-    }
     .main {
       width: 80vw;
       background-color: white;
@@ -73,15 +70,15 @@
       range(0, 100).forEach(function(i) {
         setTimeout(function() {
           get('body').classList.add('t-'+i);
-          elem('t-'+i).forEach(function(e) {
-            e.style.display = 'inline-block';
+          elem('.s-'+i).forEach(function(e) {
+            e.classList.remove('s-'+i);
           });
         }, segmentLength*i);
       });
 
       var txt = '';
       range(0, 100).forEach(function(i) {
-        txt += '.t-'+i+' .s-'+i+' {display:block} \n';
+        txt += '.s-'+i+' {display:none} \n';
       });
       styleElem.innerText = txt;
       get('head').appendChild(styleElem);

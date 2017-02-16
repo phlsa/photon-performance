@@ -21,3 +21,9 @@ function range(low, high) {
   }
   return ar;
 }
+
+function vars() {
+  for (var i = 0; i < arguments.length; i++) {
+    window[arguments[i]] = document.getElementById(arguments[i]);
+  }
+}

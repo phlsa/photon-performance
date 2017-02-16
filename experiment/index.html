@@ -23,12 +23,21 @@
         padding: 20px 40px;
         border-radius: 4px;
         margin-top: 40vh;
+        cursor: pointer;
+      }
+      div {
+        color: #fff;
+        width: 60wh;
+        margin-top: 20px;
       }
     </style>
   </head>
   <body>
     <button id="start_test">Start the Test</button>
-    <iframe src="../startup.html?testing=yes" id="experiment" width="800" height="600" style="display:none">Experiment</iframe>
+    <div class="explanation">
+      Starting the test will take over your entire screen. You can always end the test by pressing the Escape key.
+    </div>
+    <iframe src="../startup.html?testing=yes&cohort=2" id="experiment" width="800" height="600" style="display:none">Experiment</iframe>
     <script type="text/javascript">
       get('#start_test').addEventListener('click', function() {
         get('#experiment').style.display = "block";
@@ -39,6 +48,15 @@
         if (get('#start_test').mozRequestFullScreen) {
           get('#experiment').mozRequestFullScreen();
         }
+
+        function hideFrame() {
+          if (!document.mozFullScreenElement && !document.webkitFullscreenElement) {
+            get('#experiment').style.display = 'none';
+            console.log('Test Aborted');
+          }
+        }
+        document.addEventListener('mozfullscreenchange', hideFrame);
+        document.addEventListener('webkitfullscreenchange', hideFrame);
       });
     </script>
   </body>

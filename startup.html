@@ -75,6 +75,7 @@
             bottom: 0;
             color: #fff;
             float: left;
+            z-index: 999;
         }
         
         #taskbar div.launch {
@@ -88,6 +89,12 @@
             vertical-align: middle;
             cursor: default;
             margin-left: 1px;
+            border-bottom: 3px solid transparent;
+            background-image: url(img/browser.png);
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position-x: center;
+            background-position-y: 4px;
         }
         
         #taskbar div.launch:hover {
@@ -138,8 +145,8 @@
 
     <div id="taskbar">
         <div class="startbtn"></div>
-        <div class="launch cohort-1" id="l1">X</div>
-        <div class="launch cohort-2" id="l2">F</div>
+        <div class="launch cohort-1" id="l1" title="Web Browser"></div>
+        <div class="launch cohort-2" id="l2" title="Web Browser"></div>
     </div>
 
     <script type="text/javascript">
@@ -155,9 +162,7 @@
             cohort = getUrlVars()['cohort'];
             for (var i=1; i<=totalCohorts; i++) {
                 if (i == cohort) {
-                    console.log(elem('.cohort-'+i));
                     elem('.cohort-'+i).forEach((item) => {
-                        console.log(item);
                         item.classList.add('hidden');
                     });
                 }

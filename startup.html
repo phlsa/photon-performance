@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="proto.js"></script>
+    <script type="text/javascript" src="experiment/experiment.js"></script>
+    <link rel="stylesheet" href="experiment/experiment.css">
     <style>
         body {
             font-family: sans-serif;
@@ -224,6 +226,7 @@
                     s1.style.opacity = 1;
                     setTimeout(function() {
                         t1.style.opacity = 1;
+                        delayedFeedback(3000);
                     }, 2000);
                 }, 1000);
             }, 200);
@@ -239,6 +242,7 @@
                     w2.style.opacity = 1;
                     s2.style.opacity = 1;
                     t2.style.opacity = 1;
+                    delayedFeedback(3000);
                 }, 3000);
             }, 200);
         }
@@ -246,6 +250,15 @@
         l1.addEventListener('click', launch1);
         l2.addEventListener('click', launch2);
         get('.desktop-icon').addEventListener('dblclick', window['launch'+cohort]);
+
+        function feedback() {
+            ask([scale(1, 2, 3, 4, 5, 6, 7, 8), text('How many seconds did the it take for the Web Browser to launch?')]);
+        }
+        function delayedFeedback(delay) {
+            setTimeout(() => {
+                feedback();
+            }, delay);
+        }
     </script>
 </body>
 

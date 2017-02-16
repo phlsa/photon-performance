@@ -112,6 +112,9 @@
             background-size: auto 100%;
             margin-right: 4px;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -135,20 +138,32 @@
 
     <div id="taskbar">
         <div class="startbtn"></div>
-        <div class="launch" id="l2">F</div>
-        <div class="launch" id="l1">X</div>
+        <div class="launch cohort-1" id="l1">X</div>
+        <div class="launch cohort-2" id="l2">F</div>
     </div>
 
     <script type="text/javascript">
+        // hide navigation if in testing mode
         if (getUrlVars()['testing']) {
             document.getElementById('navigation').style.display = "none";
         }
-        
-        function vars() {
-            for (var i = 0; i < arguments.length; i++) {
-                window[arguments[i]] = document.getElementById(arguments[i]);
+
+        // if a test cohort is specified, limit the test to the specific item
+        var totalCohorts = 2;
+        var cohort;
+        if (getUrlVars()['cohort']) {
+            cohort = getUrlVars()['cohort'];
+            for (var i=1; i<=totalCohorts; i++) {
+                if (i == cohort) {
+                    console.log(elem('.cohort-'+i));
+                    elem('.cohort-'+i).forEach((item) => {
+                        console.log(item);
+                        item.classList.add('hidden');
+                    });
+                }
             }
         }
+        
         vars('l1', 'w1', 's1', 't1');
         vars('l2', 'w2', 's2', 't2');
 

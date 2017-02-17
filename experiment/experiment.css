@@ -12,6 +12,7 @@
 
 .exp-instruction {
   width: 20vw;
+  min-width: 500px;
   padding: 20px;
   top: 10px;
   right: 10px;
@@ -27,4 +28,8 @@
 .exp-dialog, .exp-instruction {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
+}
+
+.exp-instruction table {
+  text-align: center;
 }

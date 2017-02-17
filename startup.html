@@ -252,23 +252,44 @@
         get('.desktop-icon').addEventListener('dblclick', window['launch'+cohort]);
 
         // initial instructions
-        instruction(
-            [
-                text('Please launch the "Web Browser" application. New instructions will appear once the web browser is launched.')
-            ],
-            {
-                nextButton: clearInstructions,
-                nextButtonLabel: "OK"
-            }
-        );
+        instruction([
+            text('Please launch the "Web Browser" application. New instructions will appear once the web browser is launched.')
+        ],
+        {
+            nextButton: clearInstructions,
+            nextButtonLabel: "OK"
+        });
         
         // further instructions
         function feedback() {
             instruction([ 
                 text('How many seconds did the it take for the Web Browser to launch?'),
                 scale(1, 2, 3, 4, 5, 6, 7, 8)
-            ]);
+            ],
+            {
+                nextButton: submitAnswer
+            });
         }
+
+        function submitAnswer() {
+            var r = elem('.exp-radio').filter(v => v.checked)[0];
+
+            if (!r) {
+                alert('Please select a value');
+                return;
+            }
+
+            var answer = {
+                cohort: cohort,
+                response: r.value
+            }
+            console.log(answer);
+            clearInstructions();
+            
+            // TODO: load next experiment
+            document.location.reload();
+        }
+
         function delayedFeedback(delay) {
             setTimeout(() => {
                 feedback();

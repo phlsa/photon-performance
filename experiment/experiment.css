@@ -30,6 +30,7 @@
   font-size: 16px;
 }
 
-.exp-instruction table {
+.exp-instruction td {
   text-align: center;
+  padding: 0 5px;
 }

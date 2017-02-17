@@ -33,7 +33,7 @@ function ask(content, vars) {
 function scale() {
   var s = "<table><tr>";
   Array.prototype.slice.call(arguments).forEach(item => {
-    s += "<td><input type='radio' name='q' value='"+ item +"'><br>"+ item +"</td>";
+    s += "<td><input type='radio' name='exp-radio' class='exp-radio' value='"+ item +"'><br>"+ item +"</td>";
   });
   s += "</tr></table>";
   return s;

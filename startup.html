@@ -202,7 +202,8 @@
         var totalCohorts = 2;
         var cohort;
         if (getUrlVars()['cohort']) {
-            cohort = getUrlVars()['cohort'];
+            // cohort = getUrlVars()['cohort'];
+            cohort = Math.ceil(Math.random()*2);
             for (var i=1; i<=totalCohorts; i++) {
                 if (i == cohort) {
                     elem('.cohort-'+i).forEach((item) => {

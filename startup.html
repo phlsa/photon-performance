@@ -226,7 +226,7 @@
                     s1.style.opacity = 1;
                     setTimeout(function() {
                         t1.style.opacity = 1;
-                        delayedFeedback(3000);
+                        delayedFeedback(2000);
                     }, 2000);
                 }, 1000);
             }, 200);
@@ -242,7 +242,7 @@
                     w2.style.opacity = 1;
                     s2.style.opacity = 1;
                     t2.style.opacity = 1;
-                    delayedFeedback(3000);
+                    delayedFeedback(2000);
                 }, 3000);
             }, 200);
         }
@@ -251,8 +251,23 @@
         l2.addEventListener('click', launch2);
         get('.desktop-icon').addEventListener('dblclick', window['launch'+cohort]);
 
+        // initial instructions
+        instruction(
+            [
+                text('Please launch the "Web Browser" application. New instructions will appear once the web browser is launched.')
+            ],
+            {
+                nextButton: clearInstructions,
+                nextButtonLabel: "OK"
+            }
+        );
+        
+        // further instructions
         function feedback() {
-            ask([scale(1, 2, 3, 4, 5, 6, 7, 8), text('How many seconds did the it take for the Web Browser to launch?')]);
+            instruction([ 
+                text('How many seconds did the it take for the Web Browser to launch?'),
+                scale(1, 2, 3, 4, 5, 6, 7, 8)
+            ]);
         }
         function delayedFeedback(delay) {
             setTimeout(() => {

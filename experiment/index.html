@@ -33,31 +33,40 @@
     </style>
   </head>
   <body>
-    <button id="start_test">Start the Test</button>
+    <button id="start_test1">Experiment 1</button>
+    <button id="start_test2">Experiment 2</button>
     <div class="explanation">
       Starting the test will take over your entire screen. You can always end the test by pressing the Escape key.
     </div>
-    <iframe src="../startup.html?testing=yes&cohort=2" id="experiment" width="800" height="600" style="display:none">Experiment</iframe>
+    <iframe src="../startup.html?testing=yes&cohort=1" id="experiment1" width="800" height="600" style="display:none">Experiment</iframe>
+    <iframe src="../startup.html?testing=yes&cohort=2" id="experiment2" width="800" height="600" style="display:none">Experiment</iframe>
     <script type="text/javascript">
-      get('#start_test').addEventListener('click', function() {
-        get('#experiment').style.display = "block";
+      get('#start_test1').addEventListener('click', function() {
+        fullscreen(1);
+      });
+      get('#start_test2').addEventListener('click', function() {
+        fullscreen(2);
+      });
 
-        if (get('#start_test').webkitRequestFullscreen) {
-          get('#experiment').webkitRequestFullscreen();
+      function fullscreen(exp) {
+        get('#experiment'+exp).style.display = "block";
+
+        if (get('#start_test'+exp).webkitRequestFullscreen) {
+          get('#experiment'+exp).webkitRequestFullscreen();
         } 
-        if (get('#start_test').mozRequestFullScreen) {
-          get('#experiment').mozRequestFullScreen();
+        if (get('#start_test'+exp).mozRequestFullScreen) {
+          get('#experiment'+exp).mozRequestFullScreen();
         }
 
         function hideFrame() {
           if (!document.mozFullScreenElement && !document.webkitFullscreenElement) {
-            get('#experiment').style.display = 'none';
+            get('#experiment'+exp).style.display = 'none';
             console.log('Test Aborted');
           }
         }
         document.addEventListener('mozfullscreenchange', hideFrame);
         document.addEventListener('webkitfullscreenchange', hideFrame);
-      });
+      }
     </script>
   </body>
 </html>

@@ -202,8 +202,8 @@
         var totalCohorts = 2;
         var cohort;
         if (getUrlVars()['cohort']) {
-            // cohort = getUrlVars()['cohort'];
-            cohort = Math.ceil(Math.random()*2);
+            cohort = getUrlVars()['cohort'];
+            // cohort = Math.ceil(Math.random()*2);
             for (var i=1; i<=totalCohorts; i++) {
                 if (i == cohort) {
                     elem('.cohort-'+i).forEach((item) => {
@@ -253,13 +253,13 @@
         get('.desktop-icon').addEventListener('dblclick', window['launch'+cohort]);
 
         // initial instructions
-        instruction([
-            text('Please launch the "Web Browser" application. New instructions will appear once the web browser is launched.')
-        ],
-        {
-            nextButton: clearInstructions,
-            nextButtonLabel: "OK"
-        });
+        // instruction([
+        //     text('Please launch the "Web Browser" application. New instructions will appear once the web browser is launched.')
+        // ],
+        // {
+        //     nextButton: clearInstructions,
+        //     nextButtonLabel: "OK"
+        // });
         
         // further instructions
         function feedback() {
@@ -293,7 +293,7 @@
 
         function delayedFeedback(delay) {
             setTimeout(() => {
-                feedback();
+                //feedback();
             }, delay);
         }
     </script>

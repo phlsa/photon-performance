@@ -14,28 +14,38 @@
       /* define welcome message block */
       var welcome_block = {
         type: "text",
-        text: "Welcome to the experiment. Press any key to begin."
+        text: "Welcome to the experiment. Press any key to begin.",
       };
+
+      var test_data = [
+          {data: { version: 1 }},
+          {data: { version: 2 }}
+      ]
+
+      var all_trials = jsPsych.randomization.repeat(test_data, 1);
 
       /* define test block */
       var test_block = {
         type: "html",
         url: "startup.html",
-        // timing_post_trial: 2000
+        timeline: all_trials,
+        cont_key: 70
       };
 
       /* create experiment timeline array */
       var timeline = [];
-      timeline.push(welcome_block);
-      timeline.push(test_block);
+      timeline.push(welcome_block, test_block);
 
       /* start the experiment */
       jsPsych.init({
         timeline: timeline,
-        // fullscreen: true,
-        on_finish: function() {
-          jsPsych.data.displayData();
-        }
+        on_data_update: function(data) {
+         console.log('Just added new data. The contents of the data are: '+JSON.stringify(data));
+       },
+       on_trial_start: function() {
+          console.log('A trial just started.');
+        },
+        fullscreen: true
       });
     </script>
 </html>

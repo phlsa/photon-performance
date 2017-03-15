@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <title>My experiment</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="jspsych-5.0.3/jspsych.js"></script>
+        <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+        <script src="jspsych-5.0.3/plugins/jspsych-html.js"></script>
+        <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body>
+    </body>
+    <script>
+      /* define welcome message block */
+      var welcome_block = {
+        type: "text",
+        text: "Welcome to the experiment. Press any key to begin."
+      };
+
+      /* define test block */
+      var test_block = {
+        type: "html",
+        url: "startup.html",
+        // timing_post_trial: 2000
+      };
+
+      /* create experiment timeline array */
+      var timeline = [];
+      timeline.push(welcome_block);
+      timeline.push(test_block);
+
+      /* start the experiment */
+      jsPsych.init({
+        timeline: timeline,
+        // fullscreen: true,
+        on_finish: function() {
+          jsPsych.data.displayData();
+        }
+      });
+    </script>
+</html>

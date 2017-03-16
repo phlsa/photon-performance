@@ -19,19 +19,17 @@
 
       var survey_question = {
         type: "survey-multi-choice",
-        questions: ["how was it?"],
-        options: [[1,2,3,4]],
+        questions: ["How many seconds did the it take for the Web Browser to launch?"],
+        options: [[1, 2, 3, 4, 5, 6, 7, 8]],
         required: true,
         horizontal: true
-      }
+      };
 
       var test_data = [
-          {data: {version: 1, delay: delay_options[index]}},
-          {data: {version: 2, delay: delay_options[second_index]}},
-          {data: {version: Math.ceil(Math.random() * 2), delay: delay_options[third_index]}}
-      ]
-
-      // var all_trials = jsPsych.randomization.repeat(test_data, 1);
+          {data: {version: 1, delay: delay_options[index]}, timeline: [{}, survey_question]},
+          {data: {version: 2, delay: delay_options[second_index]}, timeline: [{}, survey_question]},
+          {data: {version: Math.ceil(Math.random() * 2), delay: delay_options[third_index]}, timeline: [{}, survey_question]}
+      ];
 
       /* define test block */
       var test_block = {
@@ -45,9 +43,6 @@
       /* create experiment timeline array */
       var timeline = [];
       timeline.push(test_block);
-      // timeline.splice(1, 0, survey_question); // nope
-      // debugger;
-
 
       /* start the experiment */
       jsPsych.init({

@@ -24,6 +24,13 @@
                       user-select: none;
         }
 
+        body.end {
+          transition: background .5s linear, opacity .5s linear;
+          background-color: #FFFFFF;
+          background-image: none;
+          opacity: 0;
+        }
+
         a {
             color: #fff
         }
@@ -235,7 +242,13 @@
                     s1.style.opacity = 1;
                     setTimeout(function() {
                         t1.style.opacity = 1;
-                        setTimeout(function() {$('#end-trial').click()}, 1500);
+                        setTimeout(function() {
+                          $('body').addClass('end');
+                          setTimeout(function() {
+                            $('#end-trial').click();
+                            $('body').removeClass('end');
+                          }, 500);
+                        }, 2000);
                     }, jsPsych.currentTrial().data.delay * (2/3));
                 }, jsPsych.currentTrial().data.delay * (1/3));
             }, 200);
@@ -251,7 +264,13 @@
                     w2.style.opacity = 1;
                     s2.style.opacity = 1;
                     t2.style.opacity = 1;
-                    setTimeout(function() {$('#end-trial').click()}, 1500);
+                    setTimeout(function() {
+                      $('body').addClass('end');
+                      setTimeout(function() {
+                        $('#end-trial').click();
+                        $('body').removeClass('end');
+                      }, 500);
+                    }, 2000);
                 }, jsPsych.currentTrial().data.delay);
             }, 200);
         }

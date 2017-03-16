@@ -4,37 +4,50 @@
         <title>My experiment</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="jspsych-5.0.3/jspsych.js"></script>
-        <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+        <script src="jspsych-5.0.3/plugins/jspsych-survey-multi-choice.js"></script>
         <script src="jspsych-5.0.3/plugins/jspsych-html.js"></script>
         <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body>
     </body>
     <script>
-      /* define welcome message block */
-      var welcome_block = {
-        type: "text",
-        text: "Welcome to the experiment. Press any key to begin.",
-      };
+
+      var delay_options = [2000, 3000, 5000];
+      var index = Math.floor(Math.random() * delay_options.length);
+      var second_index = Math.floor(Math.random() * delay_options.length);
+      var third_index = Math.floor(Math.random() * delay_options.length);
+
+      var survey_question = {
+        type: "survey-multi-choice",
+        questions: ["how was it?"],
+        options: [[1,2,3,4]],
+        required: true,
+        horizontal: true
+      }
 
       var test_data = [
-          {data: { version: 1 }},
-          {data: { version: 2 }}
+          {data: {version: 1, delay: delay_options[index]}},
+          {data: {version: 2, delay: delay_options[second_index]}},
+          {data: {version: Math.ceil(Math.random() * 2), delay: delay_options[third_index]}}
       ]
 
-      var all_trials = jsPsych.randomization.repeat(test_data, 1);
+      // var all_trials = jsPsych.randomization.repeat(test_data, 1);
 
       /* define test block */
       var test_block = {
         type: "html",
         url: "startup.html",
-        timeline: all_trials,
+        timeline: test_data,
+        randomize_order: true,
         cont_key: 70
       };
 
       /* create experiment timeline array */
       var timeline = [];
-      timeline.push(welcome_block, test_block);
+      timeline.push(test_block);
+      // timeline.splice(1, 0, survey_question); // nope
+      // debugger;
+
 
       /* start the experiment */
       jsPsych.init({

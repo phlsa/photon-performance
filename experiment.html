@@ -25,6 +25,7 @@
         horizontal: true
       };
 
+      /* randomize the delay and order of the versions. Add a survey question to each of them */
       var test_data = [
           {data: {version: 1, delay: delay_options[index]}, timeline: [{}, survey_question]},
           {data: {version: 2, delay: delay_options[second_index]}, timeline: [{}, survey_question]},
@@ -37,7 +38,7 @@
         url: "startup.html",
         timeline: test_data,
         randomize_order: true,
-        cont_key: 70
+        cont_btn: "end-trial"
       };
 
       /* create experiment timeline array */
@@ -48,10 +49,7 @@
       jsPsych.init({
         timeline: timeline,
         on_data_update: function(data) {
-         console.log('Just added new data. The contents of the data are: '+JSON.stringify(data));
-       },
-       on_trial_start: function() {
-          console.log('A trial just started.');
+          console.log('Just added new data. The contents of the data are: '+JSON.stringify(data));
         },
         fullscreen: true
       });

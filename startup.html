@@ -161,6 +161,9 @@
             width: 100%;
             pointer-events: none;
         }
+        #end-trial {
+          display: none;
+        }
     </style>
 </head>
 
@@ -190,6 +193,8 @@
         <div class="launch cohort-2" id="l1" title="Web Browser"></div>
     </div>
 
+    <button id="end-trial"></button>
+
     <script type="text/javascript">
 
         //gets url variables from the testing url NOT the iframe url as in previous
@@ -203,7 +208,6 @@
         // if a test cohort is specified, limit the test to the specific item
         // cohort 1: segmented loading
         // cohort 2: current behavior
-
         var totalCohorts = 2;
         var cohort = jsPsych.currentTrial().data.version;
             for (var i=1; i<=totalCohorts; i++) {
@@ -228,7 +232,7 @@
                     s1.style.opacity = 1;
                     setTimeout(function() {
                         t1.style.opacity = 1;
-                        // delayedFeedback(2000);
+                        setTimeout(function() {$('#end-trial').click()}, 1500);
                     }, jsPsych.currentTrial().data.delay * (2/3));
                 }, jsPsych.currentTrial().data.delay * (1/3));
             }, 200);
@@ -244,7 +248,7 @@
                     w2.style.opacity = 1;
                     s2.style.opacity = 1;
                     t2.style.opacity = 1;
-                    // delayedFeedback(2000);
+                    setTimeout(function() {$('#end-trial').click()}, 1500);
                 }, jsPsych.currentTrial().data.delay);
             }, 200);
         }
@@ -252,42 +256,6 @@
         l1.addEventListener('click', launch1);
         l2.addEventListener('click', launch2);
         get('.desktop-icon').addEventListener('dblclick', window['launch'+cohort]);
-
-        // further instructions
-        // function feedback() {
-        //     instruction([
-        //         text('How many seconds did the it take for the Web Browser to launch?'),
-        //         scale(1, 2, 3, 4, 5, 6, 7, 8)
-        //     ],
-        //     {
-        //         nextButton: submitAnswer
-        //     });
-        // }
-        //
-        // function submitAnswer() {
-        //     var r = elem('.exp-radio').filter(v => v.checked)[0];
-        //
-        //     if (!r) {
-        //         alert('Please select a value');
-        //         return;
-        //     }
-        //
-        //     var answer = {
-        //         cohort: cohort,
-        //         response: r.value
-        //     }
-        //     console.log(answer);
-        //     clearInstructions();
-        //
-        //     // TODO: load next experiment
-        //     // document.location.reload();
-        // }
-
-        // function delayedFeedback(delay) {
-        //     setTimeout(() => {
-        //         // feedback();
-        //     }, delay);
-        // }
     </script>
 </body>
 

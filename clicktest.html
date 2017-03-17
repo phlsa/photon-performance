@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+  <button id="btn" style="width:500px; height:500px">Go!</button>
+  <div id="result"></div>
+  </body>
+  <script>
+    var b = document.getElementById('btn');
+    var start;
+    b.addEventListener('mousedown', () => {
+      start = Date.now();
+    });
+    b.addEventListener('mouseup', () => {
+      document.getElementById('result').innerText = Date.now() - start;
+    })
+  </script>
+</html>

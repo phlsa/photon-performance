@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="proto.js" type="text/javascript"></script>
+        <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+        }
+        button {
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 55px;
+            left: 550px;
+            opacity: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        </style>
+    </head>
+    <body>
+    <div id="stat">Loading...</div>
+    <video width="1366" height="768" id="vid" class="hidden"></video>
+    <button id="play" class="hidden">play</button>
+    <script>
+        var vid = document.getElementById('vid');
+        var status = document.getElementById('stat');
+        var play = document.getElementById('play');
+        var played = false;
+        var video = 1;
+        video = getUrlVars()['v'];
+
+        // pre-load entire video
+        var req = new XMLHttpRequest();
+        req.open('GET', 'img/indicator/v' + video + '.mp4', true);
+        req.responseType = 'blob';
+
+        req.onload = function() {
+            if (this.status === 200) {
+                var videoBlob = this.response;
+                var v = URL.createObjectURL(videoBlob);
+                vid.src = v;
+                stat.classList.add('hidden');
+                vid.classList.remove('hidden');
+                play.classList.remove('hidden');
+            }
+        }
+        req.onerror = () => {
+            stat.innerText = 'Could not load experiment';
+        }
+        req.send();
+
+        play.addEventListener('mousemove', () => {
+            if (!played) vid.currentTime = 0.02;
+        })
+        play.addEventListener('mouseout', () => {
+            if (!played) vid.currentTime = 0;
+        })
+        play.addEventListener('mousedown', () => {
+            played = true;
+            vid.currentTime = 0.03;
+        })
+        play.addEventListener('click', () => {
+            vid.currentTime = 0.1;
+            vid.play();
+        })
+    </script>
+    </body>
+</html>

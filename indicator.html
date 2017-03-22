@@ -16,11 +16,12 @@
         button {
             display: block;
             position: absolute;
-            width: 30px;
+            width: 90px;
             height: 30px;
-            top: 55px;
-            left: 550px;
+            top: 143px;
+            left: 1110px;
             opacity: 0;
+            cursor: pointer;
         }
         .hidden {
             display: none;
@@ -59,19 +60,10 @@
         }
         req.send();
 
-        play.addEventListener('mousemove', () => {
-            if (!played) vid.currentTime = 0.02;
-        })
-        play.addEventListener('mouseout', () => {
-            if (!played) vid.currentTime = 0;
-        })
-        play.addEventListener('mousedown', () => {
-            played = true;
-            vid.currentTime = 0.03;
-        })
         play.addEventListener('click', () => {
-            vid.currentTime = 0.1;
+            vid.currentTime = 0.6;
             vid.play();
+            play.classList.add('hidden');
         })
     </script>
     </body>
